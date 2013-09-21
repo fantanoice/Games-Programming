@@ -35,3 +35,11 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Others #
+######################
+*.pch
+*.ilk
+*.lastbuiltstate
+*.pdb
+*.idb
