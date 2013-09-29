@@ -1,29 +1,22 @@
-#include "HallOfFame.h"
+#include "HallOfFameState.h"
 #include <iostream>
 
-HallOfFame::HallOfFame(void)
-{
-}
+HallOfFameState::HallOfFameState(void) {}
 
-HallOfFame::HallOfFame(Game *g)
-{
+HallOfFameState::HallOfFameState(Game *g) {
 	game = g;
 }
 
-HallOfFame::~HallOfFame(void)
-{
-}
+HallOfFameState::~HallOfFameState(void) {}
 
-void HallOfFame::Input(void)
-{
+void HallOfFameState::Input(void) {
 	std::cin >> input;
 }
 
-void HallOfFame::Update(void)
-{
+void HallOfFameState::Update(void) {
 	if(input == "B" || input == "b") {
 		input.clear();
-		GoBack();
+		GoToMenu();
 	}
 	else {
 		input.clear();
@@ -31,15 +24,17 @@ void HallOfFame::Update(void)
 	}
 }
 
-void HallOfFame::Render(void)
-{
+void HallOfFameState::Render(void) {
 	std::cout << "Zorkish :: Hall Of Fame\n";
 	std::cout << "--------------------------------------------------------\n";
 	std::cout << "I dunno, stuff.\n";
 	std::cout << "Press B to return to the Main Menu\n";
 }
 
-void HallOfFame::GoBack(void)
-{
+void HallOfFameState::GoBack(void) {
 	game->PopState();
+}
+
+void HallOfFameState::GoToMenu() {
+	game->GoToFirstState();
 }

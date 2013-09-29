@@ -5,6 +5,7 @@ Game::Game(void) {}
 Game::~Game(void) {}
 
 void Game::PopState() {
+	delete currentState.top();
 	currentState.pop();
 }
 
@@ -24,7 +25,20 @@ void Game::RenderCurrentState() {
 	currentState.top()->Render();
 }
 
+void Game::InputCurrentState() {
+	currentState.top()->Input();
+}
+
+void Game::UpdateCurrentState() {
+	currentState.top()->Update();
+}
+
 void Game::EmptyGame() {
 	while(!currentState.empty())
+		PopState();
+}
+
+void Game::GoToFirstState() {
+	while(currentState.size() > 1)
 		PopState();
 }

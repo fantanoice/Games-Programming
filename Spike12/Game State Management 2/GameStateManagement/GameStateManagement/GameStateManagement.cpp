@@ -2,22 +2,41 @@
 //
 
 #include "stdafx.h"
-#include "About.h"
 #include "Game.h"
 #include <iostream>
 #include <string>
+#include "MainMenuState.h"
 
-
-int _tmain(int argc, _TCHAR* argv[])
-{
+int _tmain(int argc, _TCHAR* argv[]) {
 	std::string input;
-
-	About *about = new About();
 	Game game;
-	game.PushState(about);
+	
+	// Give the game a MainMenu as its firt state
+	game.PushState(new MainMenuState(&game));
+	
+	// This is just to demonstrate the changing of states. This will be converted to a game loop at a later date.
 	game.RenderCurrentState();
+	game.InputCurrentState();
+	game.UpdateCurrentState();
+	game.RenderCurrentState();
+	game.InputCurrentState();
+	game.UpdateCurrentState();
+	game.RenderCurrentState();
+	game.InputCurrentState();
+	game.UpdateCurrentState();
+	game.RenderCurrentState();
+	game.InputCurrentState();
+	game.UpdateCurrentState();
+	game.RenderCurrentState();
+	game.InputCurrentState();
+	game.UpdateCurrentState();
+	game.RenderCurrentState();
+	game.InputCurrentState();
+	game.UpdateCurrentState();
+	game.RenderCurrentState();
+
+	// Pops and deallocates memory for any leftover states.
 	game.EmptyGame();
-	delete about;
 
 	std::cout << "\n\nType something in to exit the program. This is here just to see the output.\n";
 	std::cin >> input;

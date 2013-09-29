@@ -1,18 +1,17 @@
-#ifndef MAINMENU_H
-#define MAINMENU_H
+#ifndef MAINMENUSTATE_H
+#define MAINMENUSTATE_H
 
-#include "MainMenu.h"
 #include <string>
 #include "Game.h"
 
-class MainMenu : public State {
+class MainMenuState : public State {
 	private: 
 		std::string input;
 		Game *game;
 	public:
-		MainMenu(void);
-		MainMenu(Game *g);
-		~MainMenu(void);
+		MainMenuState(void);
+		MainMenuState(Game *g);
+		~MainMenuState(void);
 		void Input();
 		void Update();
 		void Render();

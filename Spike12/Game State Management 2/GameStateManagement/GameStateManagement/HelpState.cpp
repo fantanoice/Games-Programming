@@ -1,29 +1,22 @@
-#include "Help.h"
+#include "HelpState.h"
 #include <iostream>
 
-Help::Help(void)
-{
-}
+HelpState::HelpState(void) {}
 
-Help::Help(Game *g)
-{
+HelpState::HelpState(Game *g) {
 	game = g;
 }
 
-Help::~Help(void)
-{
-}
+HelpState::~HelpState(void) {}
 
-void Help::Input(void)
-{
+void HelpState::Input(void) {
 	std::cin >> input;
 }
 
-void Help::Update(void)
-{
+void HelpState::Update(void) {
 	if(input == "B" || input == "b") {
 		input.clear();
-		GoBack();
+		GoToMenu();
 	}
 	else {
 		input.clear();
@@ -31,15 +24,17 @@ void Help::Update(void)
 	}
 }
 
-void Help::Render(void)
-{
+void HelpState::Render(void) {
 	std::cout << "Zorkish :: Help\n";
 	std::cout << "--------------------------------------------------------\n";
 	std::cout << "Helpy help.\n";
 	std::cout << "Press B to return to the Main Menu\n";
 }
 
-void Help::GoBack(void)
-{
+void HelpState::GoBack(void) {
 	game->PopState();
+}
+
+void HelpState::GoToMenu() {
+	game->GoToFirstState();
 }

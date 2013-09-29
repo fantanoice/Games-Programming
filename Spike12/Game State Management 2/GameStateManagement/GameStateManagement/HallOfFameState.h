@@ -1,22 +1,23 @@
-#ifndef HALLOFFAME_H
-#define HALLOFFAME_H
+#ifndef HALLOFFAMESTATE_H
+#define HALLOFFAMESTATE_H
 
 #include "State.h"
 #include "Game.h"
 #include <string>
 
-class HallOfFame : public State {
+class HallOfFameState : public State {
 	private:
 		Game *game;
 		std::string input;
 	public:
-		HallOfFame(void);
-		~HallOfFame(void);
-		HallOfFame(Game *g);
+		HallOfFameState(void);
+		~HallOfFameState(void);
+		HallOfFameState(Game *g);
 		void Input();
 		void Update();
 		void Render();
 		void GoBack();
+		void GoToMenu();
 };
 
 #endif

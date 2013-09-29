@@ -1,43 +1,45 @@
-#include "MainMenu.h"
+#include "MainMenuState.h"
 #include <iostream>
-#include "About.h"
-#include "HallOfFame.h"
-#include "Help.h"
+#include "AboutState.h"
+#include "HallOfFameState.h"
+#include "HelpState.h"
+#include "GameState.h"
 
+MainMenuState::MainMenuState(void) {}
 
-MainMenu::MainMenu(void)
-{
-}
-
-MainMenu::MainMenu(Game *g)
-{
+MainMenuState::MainMenuState(Game *g) {
 	game = g;
 }
 
-MainMenu::~MainMenu(void)
-{
-}
+MainMenuState::~MainMenuState(void) {}
 
-void MainMenu::Input(void)
-{
+void MainMenuState::Input(void) {
 	std::cin >> input;
 }
 
-void MainMenu::Update(void)
-{
-	if(input == "2") {
+void MainMenuState::Update(void) {
+	if(input == "1") {
 		input.clear();
 		if(game != NULL)
-			game->PushState(new HallOfFame(game));
+			game->PushState(new GameState(game));
 		else {
 			std::cout << "Oops, you forgot to set game.\n";
 			exit(1);
 		}
 	}
-	if(input == "3") {
+	else if(input == "2") {
 		input.clear();
 		if(game != NULL)
-			game->PushState(new Help(game));
+			game->PushState(new HallOfFameState(game));
+		else {
+			std::cout << "Oops, you forgot to set game.\n";
+			exit(1);
+		}
+	}
+	else if(input == "3") {
+		input.clear();
+		if(game != NULL)
+			game->PushState(new HelpState(game));
 		else {
 			std::cout << "Oops, you forgot to set game.\n";
 			exit(1);
@@ -46,7 +48,7 @@ void MainMenu::Update(void)
 	else if(input == "4") {
 		input.clear();
 		if(game != NULL)
-			game->PushState(new About(game));
+			game->PushState(new AboutState(game));
 		else {
 			std::cout << "Oops, you forgot to set game.\n";
 			exit(1);
@@ -62,8 +64,7 @@ void MainMenu::Update(void)
 	}
 }
 
-void MainMenu::Render(void)
-{
+void MainMenuState::Render(void) {
 	std::cout << "Zorkish :: Main Menu\n";
 	std::cout << "--------------------------------------------------------\n";
 	std::cout << "Welcome to Zorkish Adventures\n";
@@ -75,7 +76,7 @@ void MainMenu::Render(void)
 	std::cout << "Select 1-5:> _\n";
 }
 
-void MainMenu::SetGame(Game *g) {
+void MainMenuState::SetGame(Game *g) {
 	game = g;
 }
 

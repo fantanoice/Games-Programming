@@ -16,8 +16,10 @@ class Game {
 		void PushState(State *state);
 		State *GetCurrentState();
 		void RenderCurrentState();
+		void InputCurrentState();
+		void UpdateCurrentState();
 		void EmptyGame();
-
+		void GoToFirstState();
 };
 
 #endif
