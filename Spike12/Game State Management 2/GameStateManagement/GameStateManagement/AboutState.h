@@ -3,7 +3,6 @@
 
 #include "State.h"
 #include "Game.h"
-#include <string>
 
 class AboutState : public State {
 	private:
@@ -16,6 +15,7 @@ class AboutState : public State {
 		void Input();
 		void Update();
 		void Render();
+        std::string GetName();
 		void GoBack();
 		void GoToMenu();
 };
