@@ -54,7 +54,7 @@
     <ClInclude Include="HighScore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldController.h">
+    <ClInclude Include="GameController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -92,7 +92,7 @@
     <ClCompile Include="HighScore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WorldController.cpp">
+    <ClCompile Include="GameController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

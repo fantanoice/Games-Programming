@@ -91,7 +91,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WaterWorldState.h" />
-    <ClInclude Include="WorldController.h" />
+    <ClInclude Include="GameController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutState.cpp" />
@@ -105,7 +105,7 @@
     <ClCompile Include="MountainWorldState.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="WaterWorldState.cpp" />
-    <ClCompile Include="WorldController.cpp" />
+    <ClCompile Include="GameController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

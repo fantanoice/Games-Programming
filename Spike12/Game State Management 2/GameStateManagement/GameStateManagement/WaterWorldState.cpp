@@ -5,14 +5,14 @@
 WaterWorldState::WaterWorldState(void) {}
 
 WaterWorldState::~WaterWorldState(void) {
-	delete worldController;
+	delete gameController;
 }
 
 WaterWorldState::WaterWorldState(Game *g) {
 	//game = g;
-	worldController = new WorldController(g);
+	gameController = new GameController(g);
 	//valid = true;
-	worldController->SetValidKey(true);
+	gameController->SetValidKey(true);
 }
 
 void WaterWorldState::Input(void) {

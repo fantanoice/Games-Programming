@@ -2,7 +2,6 @@
 #define MOUNTAINWORLDSTATE_H
 
 #include "State.h"
-//#include "Game.h"
 #include <string>
 #include "WorldController.h"
 
@@ -11,9 +10,8 @@ class Game;
 
 class MountainWorldState : public State {
 	private:
-		Game *game;
 		std::string input;
-		WorldController worldController;
+		WorldController *worldController;
 	public:
 		MountainWorldState(void);
 		~MountainWorldState(void);
@@ -21,8 +19,9 @@ class MountainWorldState : public State {
 		void Input();
 		void Update();
 		void Render();
-		void GoBack();
 		void GoToMenu();
+		void GoToHighScore();
+		void NotValid();
 };
 
 #endif

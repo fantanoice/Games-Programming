@@ -4,7 +4,7 @@
 #include "State.h"
 //#include "Game.h"
 #include <string>
-#include "WorldController.h"
+#include "GameController.h"
 
 // Forward declarations
 class Game;
@@ -12,7 +12,7 @@ class Game;
 class WaterWorldState : public State {
 	private:
 	//	Game *game;
-		WorldController *worldController;
+		GameController *gameController;
 		std::string input;
 	//	bool valid;
 	public:

@@ -2,14 +2,17 @@
 #define GAMESTATE_H
 
 #include "State.h"
-#include "Game.h"
+//#include "Game.h"
 #include <string>
+#include "GameController.h"
+
+// Forward declarations
+class Game;
 
 class GameState : public State {
 	private:
-		Game *game;
-		std::string input;
-		bool valid;
+	//	std::string input;
+		GameController *gameController;
 	public:
 		GameState(void);
 		~GameState(void);
@@ -17,9 +20,21 @@ class GameState : public State {
 		void Input();
 		void Update();
 		void Render();
-		void GoBack();
 		void GoToWorld(State *s);
 		void GoToMenu();
+		void GoToHighScore();
+		void NotValid();
+		void RenderValid();
 };
 
 #endif
+
+/*
+
+historic
+		Game *game;
+		bool valid;
+
+		void GoBack();
+
+*/
