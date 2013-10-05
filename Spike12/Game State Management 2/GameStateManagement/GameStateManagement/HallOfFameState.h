@@ -3,7 +3,6 @@
 
 #include "State.h"
 #include "Game.h"
-#include <string>
 
 class HallOfFameState : public State {
 	private:

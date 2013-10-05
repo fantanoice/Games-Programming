@@ -80,11 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AboutState.h" />
+    <ClInclude Include="BoxWorldState.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="HallOfFameState.h" />
     <ClInclude Include="HelpState.h" />
-    <ClInclude Include="HighScore.h" />
+    <ClInclude Include="HighScoreState.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MountainWorldState.h" />
     <ClInclude Include="State.h" />
@@ -95,12 +96,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutState.cpp" />
+    <ClCompile Include="BoxWorldState.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameStateManagement.cpp" />
     <ClCompile Include="HallOfFameState.cpp" />
     <ClCompile Include="HelpState.cpp" />
-    <ClCompile Include="HighScore.cpp" />
+    <ClCompile Include="HighScoreState.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MountainWorldState.cpp" />
     <ClCompile Include="stdafx.cpp" />

@@ -1,7 +1,5 @@
 #include "GameState.h"
 #include <iostream>
-#include "WaterWorldState.h"
-#include "MountainWorldState.h"
 
 GameState::GameState(void) {}
 
@@ -13,29 +11,29 @@ GameState::GameState(Game *g) {
 GameState::~GameState(void) {}
 
 void GameState::Input(void) {
-	std::cin >> input;
+    gameController->SetInput();
 }
 
 void GameState::Update(void) {
-	if(input =="1") {
-		input.clear();
-		valid = true;
-		GoToWorld(new MountainWorldState(game));
+    if(gameController->GetInput() == "1") {
+		Valid();
+        GoToMountainWorld();
 	}
-	if(input =="2") {
-		input.clear();
-		valid = true;
-		GoToWorld(new WaterWorldState(game));
+    else if(gameController->GetInput() == "2") {
+		Valid();
+        GoToWaterWorld();
 	}
-	else if(input == "B" || input == "b") {
-		input.clear();
-		valid = true;
-		GoToMenu();
+    else if(gameController->GetInput() == "3") {
+		Valid();
+        GoToBoxWorld();
+	}
+    else if(gameController->GetInput() == "B" || gameController->GetInput() == "b") {
+		Valid();
+        GoToMenu();
 	}
 	else {
-		input.clear();
-		valid = false;
-	}
+		NotValid();
+	}	
 }
 
 void GameState::Render(void) {
@@ -58,17 +56,34 @@ void GameState::RenderValid(void) {
 }
 
 void GameState::NotValid() {
-	input.clear();
-	gameController->SetValidKey(false);
+    gameController->NotValid();
+}
+
+void GameState::Valid() {
+    gameController->Valid();
 }
 
 void GameState::GoToWorld(State *s) {
-	game->PushState(s);
+	gameController->GoToWorld(s);
 }
 
 void GameState::GoToMenu() {
-	game->GoToFirstState();
+	gameController->GoToMenu();
 }
+
+void GameState::GoToMountainWorld() {
+	gameController->GoToMountainWorld();
+}
+
+void GameState::GoToWaterWorld() {
+	gameController->GoToWaterWorld();
+}
+
+void GameState::GoToBoxWorld() {
+	gameController->GoToBoxWorld();
+}
+
+
 
 /*
 
@@ -99,4 +114,35 @@ void GameState::GoBack(void) {
 }
 
 
+void GameState::GoToWorld(State *s) {
+	game->PushState(s);
+}
+
+void GameState::GoToMenu() {
+	game->GoToFirstState();
+}
+
+
+	//std::cin >> input;
+
 */
+
+/*    if(input =="1") {
+		input.clear();
+		valid = true;
+		GoToWorld(new MountainWorldState(game));
+	}
+	if(input =="2") {
+		input.clear();
+		valid = true;
+		GoToWorld(new WaterWorldState(game));
+	}
+	else if(input == "B" || input == "b") {
+		input.clear();
+		valid = true;
+		GoToMenu();
+	}
+	else {
+		input.clear();
+		valid = false;
+	}*/
