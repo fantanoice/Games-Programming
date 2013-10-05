@@ -79,4 +79,3 @@ void MainMenuState::Render(void) {
 void MainMenuState::SetGame(Game *g) {
 	game = g;
 }
-

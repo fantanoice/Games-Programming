@@ -12,14 +12,14 @@ class HighScoreState : public State
 		bool nameEntered;
 		int score;
 		int move;
+        std::string worldName;
 	public:
-		HighScore(void);
-		~HighScore(void);
-		HighScore(Game *g);
+		HighScoreState(void);
+		~HighScoreState(void);
+        HighScoreState(Game *g, std::string wn);
 		void Input();
 		void Update();
 		void Render();
-        std::string GetName();
 		void GoToMenu();
 };
 

@@ -1,6 +1,8 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include <string>
+
 class State {
 	public:
 		virtual void Input() = 0;

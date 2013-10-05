@@ -1,8 +1,8 @@
-#include "HighScore.h"
+#include "HighScoreState.h"
 #include <iostream>
 #include <string>
 
-HighScore::HighScore(void) {
+HighScoreState::HighScoreState(void) {
 	input = "";
 	nameEntered = false;
 	// Give the score and moves a default value for the sake of demonstration.
@@ -10,22 +10,23 @@ HighScore::HighScore(void) {
 	move = 0;
 }
 
-HighScore::~HighScore(void) {}
+HighScoreState::~HighScoreState(void) {}
 
-HighScore::HighScore(Game *g) {
+HighScoreState::HighScoreState(Game *g, std::string wn) {
 	game = g;
 	input = "";
 	nameEntered = false;
 	// Give the score and moves a default value for the sake of demonstration.
 	score = 0;
 	move = 0;
+    worldName = wn;
 }
 
-void HighScore::Input() {
+void HighScoreState::Input() {
 	std::cin >> input;
 }
 
-void HighScore::Update() {
+void HighScoreState::Update() {
 	if((input == "B" || input == "b") && nameEntered) {
 		GoToMenu();
 	}
@@ -35,7 +36,7 @@ void HighScore::Update() {
 	}
 }
 
-void HighScore::Render() {
+void HighScoreState::Render() {
 	if(nameEntered) {
 		std::cout << "Thanks, your name has been entered.\n";
 		std::cout << "Press B to go to Main Menu.\n";
@@ -46,8 +47,7 @@ void HighScore::Render() {
 		std::cout << "Congratulations!\n";
 		std::cout << "You have made it to the Zorkish Hall Of Fame\n";
 		std::cout << "Adventure: ";
-		// Todo: give world states a name
-		std::cout << game->GetCurrentState()->GetName();
+        std::cout << worldName;
 		std::cout << "\n";
 		std::cout << "Score: ";
 		std::cout << score;
@@ -60,6 +60,6 @@ void HighScore::Render() {
 	}
 }
 
-void HighScore::GoToMenu() {
+void HighScoreState::GoToMenu() {
 	game->GoToFirstState();
 }

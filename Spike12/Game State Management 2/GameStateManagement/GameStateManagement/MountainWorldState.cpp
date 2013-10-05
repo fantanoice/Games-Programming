@@ -1,34 +1,37 @@
 #include "MountainWorldState.h"
 #include <iostream>
-#include "HighScore.h"
 
 MountainWorldState::MountainWorldState(void) {}
 
 MountainWorldState::~MountainWorldState(void) {
-	delete worldController;
+	delete gameController;
 }
 
-MountainWorldState::MountainWorldState(Game *g) {
-	worldController = new WorldController(g);
-	worldController->SetValidKey(true);
+MountainWorldState::MountainWorldState(GameController *gc) {
+	gameController = gc;
+	gameController->SetValidKey(true);
 }
 
 void MountainWorldState::Input(void) {
-	std::cin >> input;
+    gameController->SetInput();
 }
 
 void MountainWorldState::Update(void) {
-	if(input == "B" || input == "b")
-		GoToMenu();
-	else if(input == "H" || input == "h")
-		GoToHighScore();
+	if(gameController->GetInput() == "B" || gameController->GetInput() == "b") {
+		Valid();
+        GoToMenu();
+    }
+	else if(gameController->GetInput() == "H" || gameController->GetInput() == "h") {
+		Valid();
+        GoToHighScore();
+    }
 	else
 		NotValid();
 }
 
 void MountainWorldState::Render(void) {
-	if(!worldController->IsValidKey())
-		worldController->RenderInvalidKey();	
+	if(!gameController->IsValidKey())
+		gameController->RenderInvalidKey();	
 	else {
 		std::cout << "Zorkish :: Mountain World\n";
 		std::cout << "--------------------------------------------------------\n";
@@ -39,21 +42,20 @@ void MountainWorldState::Render(void) {
 }
 
 void MountainWorldState::NotValid() {
-	input.clear();
-	worldController->SetValidKey(false);
+    gameController->NotValid();
+}
+
+void MountainWorldState::Valid() {
+    gameController->Valid();
 }
 
 void MountainWorldState::GoToHighScore() {
-	input.clear();
-	worldController->GoToHighScore();
+	gameController->GoToHighScore("Mountain");
 }
 
 void MountainWorldState::GoToMenu() {
-	input.clear();
-	worldController->GoToMenu();
+	gameController->GoToMenu();
 }
-
-
 
 /*
 
@@ -65,4 +67,16 @@ void MountainWorldState::GoBack(void) {
 
 void MountainWorldState::GoToMenu() {
 	game->GoToFirstState();
-}*/
+}
+
+MountainWorldState::MountainWorldState(Game *g) {
+	gameController = new GameController(g);
+	gameController->SetValidKey(true);
+}
+
+
+void MountainWorldState::Input(void) {
+	std::cin >> input;
+}
+
+*/
