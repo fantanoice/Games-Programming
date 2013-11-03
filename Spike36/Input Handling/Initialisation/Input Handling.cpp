@@ -3,107 +3,74 @@
 #include <stdio.h>
 #include <iostream>
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 600;
-const int SCREEN_HEIGHT = 800;
-
 int main( int argc, char* args[] )
 {
-/*	//The window we'll be rendering to
-	SDL_Window* window = NULL;
-	
-	//The surface contained by the window
-	SDL_Surface* screenSurface = NULL;
+    bool loop = true;
+    SDL_Event e;
+    int keyStates [10][2] = {{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{7,0},{8,0},{9,0}};
+    
+    // Initialising video and screen because they are needed to poll events. They are not used for anything else.
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Window *screen = SDL_CreateWindow("My Game Window", 0, 0, 0, 0, SDL_WINDOW_OPENGL);
 
-	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0 )
-	{
-		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
-	}
-	else
-	{
-		//Create window
-		window = SDL_CreateWindow( "Input Handling", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( window == NULL )
-		{
-			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
-		}
-		else
-		{
-			//Get window surface
-			screenSurface = SDL_GetWindowSurface( window );
+     while(loop) {
+        while(SDL_PollEvent(&e)) {
+            if(e.type == SDL_QUIT)
+                loop = false;
+            else if(e.type == SDL_KEYDOWN) {
+                // If A is pressed
+                if(e.key.keysym.sym == SDLK_a)
+                    std::cout << "A was pressed\n";
 
-			//Fill the surface white
-			SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
-			
-			//Update the surface
-			SDL_UpdateWindowSurface( window );
+                // If a number is pressed
+                if(e.key.keysym.sym == SDLK_0)
+                    keyStates[0][1] = 1;
+                else
+                    keyStates[0][1] = 0;
+                if(e.key.keysym.sym == SDLK_1)
+                    keyStates[1][1] = 1;
+                else
+                    keyStates[1][1] = 0;
+                if(e.key.keysym.sym == SDLK_2)
+                    keyStates[2][1] = 1;
+                else
+                    keyStates[2][1] = 0;
+                if(e.key.keysym.sym == SDLK_3)
+                    keyStates[3][1] = 1;
+                else
+                    keyStates[3][1] = 0;
+                if(e.key.keysym.sym == SDLK_4)
+                    keyStates[4][1] = 1;
+                else
+                    keyStates[4][1] = 0;
+                if(e.key.keysym.sym == SDLK_5)
+                    keyStates[5][1] = 1;
+                else
+                    keyStates[5][1] = 0;
+                if(e.key.keysym.sym == SDLK_6)
+			        keyStates[6][1] = 1;
+		        else
+			        keyStates[6][1] = 0;
+                if(e.key.keysym.sym == SDLK_7)
+					keyStates[7][1] = 1;
+				else
+					keyStates[7][1] = 0;
+                if(e.key.keysym.sym == SDLK_8)
+					keyStates[8][1] = 1;
+				else
+					keyStates[8][1] = 0;
+                if(e.key.keysym.sym == SDLK_9)
+					keyStates[9][1] = 1;
+				else
+					keyStates[9][1] = 0;
 
-            SDL_Event e;
-
-            if( e.type == SDL_KEYDOWN )
-                    {
-                        //Select surfaces based on key press
-                        switch( e.key.keysym.sym )
-                        {
-                            case SDLK_UP:
-                                std::cout << "Up was pressed";
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
-
-			//Wait two seconds
-			SDL_Delay( 2000 );
-		}
-	}
-
-	//Destroy window
-	SDL_DestroyWindow( window );
-
-	//Quit SDL subsystems
-	SDL_Quit();
-    */
-
-//Main loop flag
-            bool quit = false;
-
-            bool init();
-
-            //Event handler
-            SDL_Event e;
-
-
-            std::cout << "wat";
-            //While application is running
-            while( !quit )
-            {
-             //   std::cout << "duddi";
-//Handle events on queue
-                while(SDL_PollEvent(&e))
-                {
-                    std::cout << "Deewwwd";
-                    //User requests quit
-                    if( e.type == SDL_QUIT )
-                    {
-                        quit = true;
-                    }
-                    //User presses a key
-                    else if( e.type == SDL_KEYDOWN )
-                    {
-                        //Select surfaces based on key press
-                        switch( e.key.keysym.sym )
-                        {
-                            case SDLK_0:
-                                std::cout << "0 was pressed";
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                // Display keyboard states
+                for(int i = 0; i < 10; i++) {
+                    if(keyStates[i][1] == 1)
+                        std::cout << keyStates[i][0] << " was pressed\n";
                 }
             }
-	return 0;
+        }
+    }
+    return 0;
 }
