@@ -1,106 +1,200 @@
+//Using SDL and standard IO
 #include <SDL.h>
+#include <stdio.h>
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
 
-void Draw(bool &backgroundOn, SDL_Surface *screenSurface, SDL_Surface *backgroundSurface, SDL_Rect *backgroundLocRect, SDL_Surface *foregroundSurface, SDL_Rect *bigForegroundRect, SDL_Rect *bigForegroundLocRect, SDL_Rect *medForegroundRect, SDL_Rect *medForegroundLocRect, SDL_Rect *smallForegroundRect, SDL_Rect *smallForegroundLocRect, SDL_Window *window);
-int RandLocX();
-int RandLocY();
+bool loadMedia(SDL_Surface * surface);
+bool init(SDL_Window* window, SDL_Surface* screenSurface);
+void close(SDL_Surface* surface, SDL_Window* window, SDL_Surface* screenSurface);
 
+//Screen dimension constants
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 600;
 
 int main( int argc, char* args[] )
 {
-    srand(time(0));
-    
-    if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-        std::cout << "SDL could not initialize!\n";
-    else {
-        bool loop = true;
-        SDL_Event e;
+    bool loop = true;
+    SDL_Event e;
+    int keyStates [10][2] = {{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{7,0},{8,0},{9,0}};
 
-        SDL_Surface* screenSurface = NULL;
-        SDL_Surface* backgroundSurface = NULL;
-        SDL_Surface* foregroundSurface = NULL;
-        SDL_Window *window = SDL_CreateWindow("2D Drawing", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+ //   SDL_Window* window = NULL;
+    SDL_Surface* screenSurface = NULL;
+    SDL_Surface* helloSurface = NULL;
+    SDL_Window *window = SDL_CreateWindow("2D Drawing", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
-	    backgroundSurface = SDL_LoadBMP("img/happy_ray.bmp");
-        foregroundSurface = SDL_LoadBMP("img/penguin_power.bmp");
+	if(SDL_Init( SDL_INIT_VIDEO ) >= 0) {
+		
+        /*
+        if(!init(window, screenSurface)) {
+            printf("init() failed", SDL_GetError());
+            SDL_QUIT;
+        }
 
-        SDL_Rect backgroundLocRect = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT};
-        SDL_Rect bigForegroundRect = {200,200,300,300};
-        SDL_Rect bigForegroundLocRect = {RandLocX(),RandLocY(),100,100};
-        SDL_Rect medForegroundRect = {200,100,100,100};
-        SDL_Rect medForegroundLocRect = {RandLocX(),RandLocY(),100,100};
-        SDL_Rect smallForegroundRect = {600,200,50,50};
-        SDL_Rect smallForegroundLocRect = {RandLocX(),RandLocY(),100,100};
-        
-        if(backgroundSurface != NULL && foregroundSurface != NULL) {
-            bool backgroundOn = true;
+        if(!loadMedia(helloSurface)) {
+            printf("loadMedia() failed", SDL_GetError());
+            SDL_QUIT;
+        }
+
+        */
+
+        helloSurface = SDL_LoadBMP( "02_getting_an_image_on_the_screen/hello_world.bmp" );
+        if(helloSurface != NULL) {
+
+
             screenSurface = SDL_GetWindowSurface(window);
 
-            while(loop) {
-                while(SDL_PollEvent(&e)) {
+//            SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
+			
 
-                    if((e.type == SDL_QUIT) || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_a))
-                        loop = false;
-                    else if(e.type == SDL_KEYDOWN) {
-                        if(e.key.keysym.sym == SDLK_0) {
-                            if(backgroundOn)
-                                backgroundOn = false;
+            SDL_BlitSurface( helloSurface, NULL, screenSurface, NULL );
+        
+            SDL_UpdateWindowSurface( window );
+            SDL_Delay( 10000 );
+
+     //       SDL_FreeSurface( hello );
+
+            
+
+         /*    while(loop) {
+                    while(SDL_PollEvent(&e)) {
+                        if(e.type == SDL_QUIT)
+                            loop = false;
+                        else if(e.type == SDL_KEYDOWN) {
+                            // If A is pressed
+                            if(e.key.keysym.sym == SDLK_a)
+                                std::cout << "A was pressed\n";
+
+                            // If a number is pressed
+                            if(e.key.keysym.sym == SDLK_0)
+                                keyStates[0][1] = 1;
                             else
-                                backgroundOn = true;
-                        }
-                        else if(e.key.keysym.sym == SDLK_1) {
-                            SDL_FillRect( screenSurface, NULL, SDL_MapRGB( foregroundSurface->format, 0x00, 0x00, 0x00 ) );
-                            bigForegroundLocRect.x = RandLocX();
-                            bigForegroundLocRect.y = RandLocY();
-                        }
-                        else if(e.key.keysym.sym == SDLK_2) {
-                            SDL_FillRect( screenSurface, NULL, SDL_MapRGB( foregroundSurface->format, 0x00, 0x00, 0x00 ) );
-                            medForegroundLocRect.x = RandLocX();
-                            medForegroundLocRect.y = RandLocY();
-                        }
-                        else if(e.key.keysym.sym == SDLK_3) {
-                            SDL_FillRect( screenSurface, NULL, SDL_MapRGB( foregroundSurface->format, 0x00, 0x00, 0x00 ) );
-                            smallForegroundLocRect.x = RandLocX();
-                            smallForegroundLocRect.y = RandLocY();
+                                keyStates[0][1] = 0;
+                            if(e.key.keysym.sym == SDLK_1)
+                                keyStates[1][1] = 1;
+                            else
+                                keyStates[1][1] = 0;
+                            if(e.key.keysym.sym == SDLK_2)
+                                keyStates[2][1] = 1;
+                            else
+                                keyStates[2][1] = 0;
+                            if(e.key.keysym.sym == SDLK_3)
+                                keyStates[3][1] = 1;
+                            else
+                                keyStates[3][1] = 0;
+                            if(e.key.keysym.sym == SDLK_4)
+                                keyStates[4][1] = 1;
+                            else
+                                keyStates[4][1] = 0;
+                            if(e.key.keysym.sym == SDLK_5)
+                                keyStates[5][1] = 1;
+                            else
+                                keyStates[5][1] = 0;
+                            if(e.key.keysym.sym == SDLK_6)
+                                keyStates[6][1] = 1;
+                            else
+                                keyStates[6][1] = 0;
+                            if(e.key.keysym.sym == SDLK_7)
+                                keyStates[7][1] = 1;
+				            else
+					            keyStates[7][1] = 0;
+                            if(e.key.keysym.sym == SDLK_8)
+					            keyStates[8][1] = 1;
+				            else
+					            keyStates[8][1] = 0;
+                            if(e.key.keysym.sym == SDLK_9)
+                                keyStates[9][1] = 1;
+                            else
+                                keyStates[9][1] = 0;
+
+                            // Display keyboard states
+                            for(int i = 0; i < 10; i++) {
+                                if(keyStates[i][1] == 1)
+                                    std::cout << keyStates[i][0] << " was pressed\n";
+                            }
                         }
                     }
+            }*/
 
-                    Draw(backgroundOn, screenSurface, backgroundSurface, &backgroundLocRect, foregroundSurface, &bigForegroundRect, &bigForegroundLocRect, &medForegroundRect, &medForegroundLocRect, &smallForegroundRect, &smallForegroundLocRect, window); 
-                }
-            }
 
-            SDL_FreeSurface(backgroundSurface);
-            SDL_FreeSurface(screenSurface);
-            SDL_DestroyWindow( window );
+/*
+            //Apply the image
+            SDL_BlitSurface( helloSurface, NULL, screenSurface, NULL );
 
-            SDL_Quit();
+            //Update the surface
+            SDL_UpdateWindowSurface( window );
+
+            //Wait two seconds
+            SDL_Delay( 2000 );
+
+         //   close(helloSurface, window, screenSurface);
+
+*/
+
+
+            std::cout << "Done!";
+
+            	SDL_FreeSurface(helloSurface);
+	delete helloSurface;
+
+	SDL_DestroyWindow( window );
+	delete window;
+
+    SDL_FreeSurface(screenSurface);
+	delete screenSurface;
+
         }
-        else
-            std::cout << "Unable to load images\n";
+        else {
+        printf( "Unable to load image %s! SDL Error: %s\n", "02_getting_an_image_on_the_screen/hello_world.bmp", SDL_GetError() );
+        }
     }
-    
+    else {
+        printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
+	}
+
+    SDL_Delay( 10000 );
+    SDL_Quit();
     return 0;
 }
 
-void Draw(bool &backgroundOn, SDL_Surface *screenSurface, SDL_Surface *backgroundSurface, SDL_Rect *backgroundLocRect, SDL_Surface *foregroundSurface, SDL_Rect *bigForegroundRect, SDL_Rect *bigForegroundLocRect, SDL_Rect *medForegroundRect, SDL_Rect *medForegroundLocRect, SDL_Rect *smallForegroundRect, SDL_Rect *smallForegroundLocRect, SDL_Window *window) { 
-    if(backgroundOn)
-        SDL_BlitSurface(backgroundSurface, NULL, screenSurface, backgroundLocRect);
-    else
-        SDL_FillRect( screenSurface, NULL, SDL_MapRGB( backgroundSurface->format, 0x00, 0x00, 0x00 ) );
-    SDL_BlitSurface(foregroundSurface, bigForegroundRect, screenSurface, bigForegroundLocRect);
-    SDL_BlitSurface(foregroundSurface, medForegroundRect, screenSurface, medForegroundLocRect);
-    SDL_BlitSurface(foregroundSurface, smallForegroundRect, screenSurface, smallForegroundLocRect);
-    SDL_UpdateWindowSurface( window );
+
+/*
+bool loadMedia(SDL_Surface* surface) {
+	surface = SDL_LoadBMP( "02_getting_an_image_on_the_screen/hello_world.bmp" );
+
+	if( surface == NULL ) {
+		printf( "Unable to load image %s! SDL Error: %s\n", "02_getting_an_image_on_the_screen/hello_world.bmp", SDL_GetError() );
+		return false;
+	}
+
+	return true;
 }
 
-int RandLocX() {
-    return rand()%SCREEN_WIDTH;
+bool init(SDL_Window* window, SDL_Surface* screenSurface) {
+	if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
+		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
+		return false;
+	}
+	
+    window = SDL_CreateWindow( "SDL Tutorial", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+
+	if( window == NULL ) {
+		printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
+		return false;
+	}
+
+    screenSurface = SDL_GetWindowSurface(window);
+	return true;
 }
 
-int RandLocY() {
-    return rand()%SCREEN_HEIGHT;
-}
+void close(SDL_Surface* surface, SDL_Window* window, SDL_Surface* screenSurface) {
+	SDL_FreeSurface(surface);
+	delete surface;
+
+	SDL_DestroyWindow( window );
+	delete window;
+
+    SDL_FreeSurface(screenSurface);
+	delete screenSurface;
+
+	SDL_Quit();
+}*/
