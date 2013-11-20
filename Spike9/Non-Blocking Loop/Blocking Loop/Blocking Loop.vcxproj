@@ -14,7 +14,7 @@
     <ProjectGuid>{455F4F10-E343-44FC-A680-0B4899EAAE52}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>BlockingLoop</RootNamespace>
-    <ProjectName>Messaging</ProjectName>
+    <ProjectName>A+B</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AboutState.h" />
+    <ClInclude Include="Announcer.h" />
     <ClInclude Include="BoxWorldState.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameController.h" />
@@ -101,12 +102,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutState.cpp" />
+    <ClCompile Include="Announcer.cpp" />
     <ClCompile Include="BoxWorldState.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Mail.cpp" />
-    <ClCompile Include="Messaging.cpp" />
+    <ClCompile Include="A+B.cpp" />
     <ClCompile Include="HallOfFameState.cpp" />
     <ClCompile Include="HelpState.cpp" />
     <ClCompile Include="HighScoreState.cpp" />

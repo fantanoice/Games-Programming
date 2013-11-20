@@ -72,6 +72,9 @@
     <ClInclude Include="MessagingManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Announcer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -113,10 +116,13 @@
     <ClCompile Include="Mail.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Messaging.cpp">
+    <ClCompile Include="MessagingManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MessagingManager.cpp">
+    <ClCompile Include="A+B.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Announcer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
