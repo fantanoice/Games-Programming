@@ -3,14 +3,19 @@
 
 Game::Game(MessagingManager *pMessagingManager) {
     messagingManager = pMessagingManager;
+    announcer = new Announcer(messagingManager);
+    announcer->AddSubscriber("AboutState");
+    announcer->AddSubscriber("MainMenuState");
+    announcer->Announce("Game has started. Letting the subscribers know.");
 }
 
 Game::~Game(void) {
     delete messagingManager;
+    delete announcer;
 }
 
 void Game::PopState() {
-	delete currentState.top();
+    delete currentState.top();
 	currentState.pop();
 }
 

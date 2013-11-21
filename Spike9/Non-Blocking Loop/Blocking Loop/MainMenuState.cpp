@@ -24,13 +24,15 @@ void MainMenuState::Input() {
 }
 
 bool MainMenuState::Update() {
+    CheckBlackboard();
+
     Receive();
 
     for(std::vector<int>::size_type i = 0; i != inMail.size(); i++) {
         std::cout << messengerID + " Mail = " + (inMail.begin() + i)->GetContents() + "\n";
     }
     inMail.erase(inMail.begin(),inMail.end());
-    
+
     if(input == "") {
 		input.clear();
 		render = false;
@@ -62,6 +64,12 @@ bool MainMenuState::Update() {
 		}
 	}
 	return true;
+}
+
+void MainMenuState::CheckBlackboard() {
+    Mail *mail = new Mail(messengerID,"Blackboard","Blackboard|" + messengerID);
+    Send(*mail);
+    delete mail;
 }
 
 bool MainMenuState::GoToState(State *s) {

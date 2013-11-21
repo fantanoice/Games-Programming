@@ -15,6 +15,7 @@ class MainMenuState : public State, public Messenger  {
 		bool render;
         std::string messengerID;
         std::vector<Mail> inMail;
+        void CheckBlackboard();
 	public:
 		MainMenuState(void);
 		MainMenuState(Game *g);

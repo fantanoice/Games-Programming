@@ -11,6 +11,7 @@ public:
     ~Mail(void);
     inline std::string GetReceiver() { return receiver; }
     inline std::string GetContents() { return contents; }
+    inline std::string GetSender() { return sender; }
 
 private:
     std::string sender;

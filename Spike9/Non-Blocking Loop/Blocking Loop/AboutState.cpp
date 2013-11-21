@@ -18,7 +18,14 @@ void AboutState::Input(void) {
 }
 
 bool AboutState::Update() {
-	if(input == "") {
+    Receive();
+
+    for(std::vector<int>::size_type i = 0; i != inMail.size(); i++) {
+        std::cout << messengerID + " Mail = " + (inMail.begin() + i)->GetContents() + "\n";
+    }
+    inMail.erase(inMail.begin(),inMail.end());
+    
+    if(input == "") {
 		input.clear();
 		render = false;
 	}

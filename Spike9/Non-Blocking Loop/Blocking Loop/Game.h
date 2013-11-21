@@ -4,11 +4,13 @@
 #include "State.h"
 #include <stack>
 #include "MessagingManager.h"
+#include "Announcer.h"
 
 class Game {
 	private:
 		std::stack<State*> currentState;
         MessagingManager *messagingManager;
+        Announcer* announcer;
 	protected:
 		// Eventually move CurrentState functions here for friend classes.
 	public:
